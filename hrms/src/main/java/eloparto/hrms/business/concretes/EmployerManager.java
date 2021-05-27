@@ -75,13 +75,10 @@ public class EmployerManager implements EmployerService {
 	}
 	
 	private boolean isRealEmployer(Employer employer) {
-		String regex = "^(.+)@(.+)$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(employer.getEmail());
-		if(!matcher.matches()) {
-			return false;
-		}
-		return true;
+		String EMAIL_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+.(com|org|net|edu|gov|mil|biz|info|mobi)(.[A-Z]{2})?$";
+		Pattern pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
+
+		return pattern.matcher(employer.getEmail()).find();
 	}
 	
 	private boolean isEmailAlreadyRegistered(Employer employer) {

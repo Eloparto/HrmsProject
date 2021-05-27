@@ -135,13 +135,10 @@ public class CandidateManager implements CandidateService {
 		return true;
 	}
 	private boolean isRealEmail(Candidate candidate) {
-		String regex = "^(.+)@(.+)$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(candidate.getEmail());
-		if(!matcher.matches()) {
-			return false;
-		}
-		return true;
+		String EMAIL_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+.(com|org|net|edu|gov|mil|biz|info|mobi)(.[A-Z]{2})?$";
+		Pattern pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
+
+		return pattern.matcher(candidate.getEmail()).find();
 	}
 	
 	
